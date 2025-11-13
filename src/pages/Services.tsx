@@ -174,13 +174,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* ==================== ANIMATION OPTIONS ==================== */}
           {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
 
-          {/* Pulsing Rings */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-64 h-64 border-2 border-[#1e3a8a] rounded-full animate-pingSlow opacity-20"></div>
-            <div className="w-96 h-96 border-2 border-[#3b82f6] rounded-full animate-pingSlower opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div>
-        </div>
-
           {/* Option 2: Morphing Blob */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-64 h-64 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] animate-morphing-blob opacity-20 blur-xl"></div>
