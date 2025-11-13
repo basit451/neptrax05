@@ -215,7 +215,6 @@ export default function Services({ onNavigate }: ServicesProps) {
             <div className="w-64 h-64 border-2 border-[#60a5fa] rounded-full animate-pingSlower opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 -rotate-45"></div>
             <div className="w-32 h-32 border border-[#1e3a8a] rounded-full animate-pulse opacity-40 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
           </div>
-
         </div>
 
         {/* Main Content with Entrance Animations */}
