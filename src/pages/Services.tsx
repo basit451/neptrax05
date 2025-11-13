@@ -171,12 +171,11 @@ export default function Services({ onNavigate }: ServicesProps) {
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] rounded-full blur-3xl opacity-20 animate-orbFloat"></div>
           <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full blur-3xl opacity-15 animate-orbFloatReverse"></div>
           
-        {/* Multi-layer Concentric Rings */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-32 h-32 border border-[#60a5fa] rounded-full animate-pingSlow opacity-30"></div>
-            <div className="w-64 h-64 border-2 border-[#3b82f6] rounded-full animate-pingSlow opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-1000"></div>
-            <div className="w-96 h-96 border border-[#1e3a8a] rounded-full animate-pingSlower opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-2000"></div>
-            <div className="w-128 h-128 border-2 border-[#2563eb] rounded-full animate-pingSlowest opacity-15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-3000"></div>
+{/* Pulsing Rings */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-64 h-64 border-2 border-[#1e3a8a] rounded-full animate-pingSlow opacity-20"></div>
+            <div className="w-96 h-96 border-2 border-[#3b82f6] rounded-full animate-pingSlower opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+          </div>
         </div>
 
         {/* Main Content with Entrance Animations */}
