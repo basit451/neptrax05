@@ -161,10 +161,10 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* <div className="absolute inset-0 bg-glass-sweep"></div> */}
 
           {/* Option 5: Noise Gradient Overlay */}
-           <div className="absolute inset-0 bg-noise-gradient"></div> 
+          {/* <div className="absolute inset-0 bg-noise-gradient"></div> */}
 
           {/* Option 6: Particle Lines / Network Animation */}
-          {/* <div className="absolute inset-0">
+           <div className="absolute inset-0">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
@@ -177,7 +177,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               />
             ))}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/20 to-transparent animate-network-pulse"></div>
-          </div> */}
+          </div> 
 
           {/* Option 7: Rotating 3D Shapes */}
           {/* <div className="absolute inset-0">
