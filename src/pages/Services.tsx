@@ -175,11 +175,11 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
 
           {/* Option 1: Floating Geometric Shapes */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-20 h-20 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-lg animate-float-slow opacity-30 rotate-45"></div>
             <div className="w-16 h-16 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] rounded-full animate-float-medium opacity-40 absolute top-1/4 left-1/4 animation-delay-1000"></div>
             <div className="w-24 h-24 bg-gradient-to-r from-[#60a5fa] to-[#93c5fd] rounded-lg animate-float-fast opacity-25 absolute bottom-1/4 right-1/4 animation-delay-2000 rotate-12"></div>
-          </div> */}
+          </div>
 
           {/* Option 2: Morphing Blob */}
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
