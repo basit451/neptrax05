@@ -164,7 +164,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* <div className="absolute inset-0 bg-noise-gradient"></div> */}
 
           {/* Option 6: Particle Lines / Network Animation */}
-           <div className="absolute inset-0">
+          {/* <div className="absolute inset-0">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
@@ -177,13 +177,13 @@ export default function Services({ onNavigate }: ServicesProps) {
               />
             ))}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/20 to-transparent animate-network-pulse"></div>
-          </div> 
+          </div> */}
 
           {/* Option 7: Rotating 3D Shapes */}
-          {/* <div className="absolute inset-0">
+           <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-500 to-blue-500 animate-rotate-3d opacity-20 blur-2xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400 to-cyan-400 animate-rotate-3d-reverse opacity-15 blur-2xl animation-delay-1000"></div>
-          </div> */}
+          </div> 
 
           {/* Option 8: Moving Stripes / Gradient Sweep */}
           {/* <div className="absolute inset-0 bg-stripes-animated"></div> */}
