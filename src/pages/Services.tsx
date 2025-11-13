@@ -195,19 +195,19 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 4: Rotating Orbital Rings */}
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-72 h-72 border-2 border-[#3b82f6] rounded-full animate-spin-slow opacity-30"></div>
             <div className="w-96 h-96 border border-[#60a5fa] rounded-full animate-spin-slower opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-reverse"></div>
             <div className="w-56 h-56 border-2 border-[#1e3a8a] rounded-full animate-spin-medium opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div>
+          </div> */}
 
           {/* Option 5: Pulsing Dot with Rings (Recommended) */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <div className="w-4 h-4 bg-gradient-to-r from-[#60a5fa] to-[#3b82f6] rounded-full animate-pulse opacity-70 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
             <div className="w-48 h-48 border border-[#60a5fa] rounded-full animate-pingSlow opacity-30"></div>
             <div className="w-80 h-80 border-2 border-[#3b82f6] rounded-full animate-pingSlower opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-700"></div>
             <div className="w-112 h-112 border border-[#1e3a8a] rounded-full animate-pingSlowest opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-1400"></div>
-          </div> */}
+          </div> 
 
           {/* Option 6: Modern Geometric Pattern */}
           {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
