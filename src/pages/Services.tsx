@@ -177,7 +177,7 @@ export default function Services({ onNavigate }: ServicesProps) {
   <div className="w-64 h-64 border-2 border-[#3b82f6] rounded-full animate-pingSlow opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-1000"></div>
   <div className="w-96 h-96 border border-[#1e3a8a] rounded-full animate-pingSlower opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-2000"></div>
   <div className="w-128 h-128 border-2 border-[#2563eb] rounded-full animate-pingSlowest opacity-15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-3000"></div>
-</div>
+        </div>
 
         {/* Main Content with Entrance Animations */}
         <div className={`relative z-10 max-w-6xl mx-auto px-6 text-center transition-all duration-1000 ${
