@@ -89,8 +89,8 @@ export default function Services({ onNavigate }: ServicesProps) {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
         
         {/* WebGL/Canvas Background - CHOOSE ONE */}
-        <ThreeJSParticles />
-        {/* <CanvasParticleField /> */}
+        {/* <ThreeJSParticles /> */}
+        <CanvasParticleField />
         
         {/* Dark overlay for better text contrast */}
         <div className="absolute inset-0 bg-black/40 z-1"></div>
