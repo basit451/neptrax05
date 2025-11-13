@@ -131,10 +131,10 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
 
           {/* Option 1: Gradient Flow / Animated Gradient */}
-           <div className="absolute inset-0 bg-gradient-animated"></div>
+          {/* <div className="absolute inset-0 bg-gradient-animated"></div> */}
 
           {/* Option 2: Floating Particles */}
-          {/* <div className="absolute inset-0">
+           <div className="absolute inset-0">
             {particles.map((particle) => (
               <div
                 key={particle.id}
@@ -149,7 +149,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 }}
               />
             ))}
-          </div> */}
+          </div>
 
           {/* Option 3: Liquid Wave Background */}
           {/* <div className="absolute inset-0">
