@@ -13,7 +13,7 @@ import {
   TrendingUp,
   ArrowUpRight
 } from 'lucide-react';
-import { motion, useScroll, useTransform, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useInView, ScrollReveal } from '../components/FramerMotion';
 import { useRef, useEffect, useState } from 'react';
 import Silk from '../components/Silk';
 import MissionSection from '../components/MissionSection';
