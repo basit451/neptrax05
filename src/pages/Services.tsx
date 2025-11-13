@@ -171,43 +171,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] rounded-full blur-3xl opacity-20 animate-orbFloat"></div>
           <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full blur-3xl opacity-15 animate-orbFloatReverse"></div>
           
-          {/* ==================== PULSING RINGS OPTIONS ==================== */}
-          {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
-
-          {/* Option 1: Original Simple Rings */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-64 h-64 border-2 border-[#1e3a8a] rounded-full animate-pingSlow opacity-20"></div>
-            <div className="w-96 h-96 border-2 border-[#3b82f6] rounded-full animate-pingSlower opacity-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div> */}
-
-          {/* Option 2: Multi-layer Concentric Rings */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-32 h-32 border border-[#60a5fa] rounded-full animate-pingSlow opacity-30"></div>
-            <div className="w-64 h-64 border-2 border-[#3b82f6] rounded-full animate-pingSlow opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-1000"></div>
-            <div className="w-96 h-96 border border-[#1e3a8a] rounded-full animate-pingSlower opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-2000"></div>
-            <div className="w-128 h-128 border-2 border-[#2563eb] rounded-full animate-pingSlowest opacity-15 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-3000"></div>
-          </div> */}
-
-          {/* Option 3: Gradient Rings with Glow */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-80 h-80 border-2 border-transparent bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] rounded-full animate-pingSlow opacity-20 blur-sm"></div>
-            <div className="w-96 h-96 border-2 border-transparent bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full animate-pingSlower opacity-15 blur-sm absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div> */}
-
-          {/* Option 4: Rotating Orbital Rings */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-72 h-72 border-2 border-[#3b82f6] rounded-full animate-spin-slow opacity-30"></div>
-            <div className="w-96 h-96 border border-[#60a5fa] rounded-full animate-spin-slower opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-reverse"></div>
-            <div className="w-56 h-56 border-2 border-[#1e3a8a] rounded-full animate-spin-medium opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
-          </div> */}
-
-          {/* Option 5: Pulsing Dot with Rings (Recommended) */}
-          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-4 h-4 bg-gradient-to-r from-[#60a5fa] to-[#3b82f6] rounded-full animate-pulse opacity-70 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"></div>
-            <div className="w-48 h-48 border border-[#60a5fa] rounded-full animate-pingSlow opacity-30"></div>
-            <div className="w-80 h-80 border-2 border-[#3b82f6] rounded-full animate-pingSlower opacity-25 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-700"></div>
-            <div className="w-112 h-112 border border-[#1e3a8a] rounded-full animate-pingSlowest opacity-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 animation-delay-1400"></div>
-          </div> */}
 
           {/* Option 6: Modern Geometric Pattern */}
            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
