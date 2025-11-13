@@ -91,11 +91,7 @@ export default function Services({ onNavigate }: ServicesProps) {
   ];
 
   const backgroundComponents = {
-    shader: <ShaderBackground />,
     webgl: <WebGLParticles />,
-    canvas: <AdvancedCanvas />,
-    rive: <RiveAnimation />,
-    lottie: <LottieBackground />
   };
 
   const backgroundNames = {
