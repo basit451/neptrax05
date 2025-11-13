@@ -180,20 +180,20 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 7: Rotating 3D Shapes */}
-           <div className="absolute inset-0">
+          {/* <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-r from-purple-500 to-blue-500 animate-rotate-3d opacity-20 blur-2xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-400 to-cyan-400 animate-rotate-3d-reverse opacity-15 blur-2xl animation-delay-1000"></div>
-          </div> 
+          </div> */}
 
           {/* Option 8: Moving Stripes / Gradient Sweep */}
-          {/* <div className="absolute inset-0 bg-stripes-animated"></div> */}
+           <div className="absolute inset-0 bg-stripes-animated"></div> */}
 
           {/* Option 9: Parallax Blur Layers */}
           {/* <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-blue-900/30 animate-parallax-slow opacity-40"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-900/20 via-transparent to-blue-900/20 animate-parallax-medium opacity-30"></div>
             <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/25 via-transparent to-purple-900/25 animate-parallax-fast opacity-35"></div>
-          </div> */}
+          </div> 
 
           {/* Option 10: Aurora Effect */}
           {/* <div className="absolute inset-0 bg-aurora-effect"></div> */}
