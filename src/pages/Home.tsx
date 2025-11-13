@@ -119,20 +119,30 @@ export default function Home({ onNavigate }: HomeProps) {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 justify-center lg:justify-start px-4 sm:px-0">
                 <motion.button
                   onClick={() => onNavigate('contact')}
-                  className="px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all duration-300 text-sm sm:text-base"
+                  className="group relative px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-transparent border-2 border-cyan-400/50 text-[#f1f5f9] font-medium overflow-hidden transition-all duration-500 hover:scale-105 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25 backdrop-blur-sm text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Book a Call
+                  <span className="relative z-10 flex items-center gap-2">
+                    <span>Book a Call</span>
+                    <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                 </motion.button>
+                
                 <motion.button
                   onClick={() => onNavigate('portfolio')}
-                  className="group px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full bg-transparent border border-[#8f9eb3] text-[#f1f5f9] font-medium hover:brightness-125 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                  className="group relative px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full bg-transparent border-2 border-purple-400/50 text-[#f1f5f9] font-medium overflow-hidden transition-all duration-500 hover:scale-105 hover:border-purple-400 hover:shadow-2xl hover:shadow-purple-500/25 backdrop-blur-sm flex items-center justify-center gap-2 text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  View Our Work
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  <span className="relative z-10 flex items-center gap-2">
+                    <span>View Our Work</span>
+                    <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
+                  </span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-500/20 to-pink-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-purple-400 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
                 </motion.button>
               </div>
             </ScrollReveal>
@@ -173,7 +183,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
       <MissionSection />
 
-      {/* Enhanced Clients Section */}
+      {/* Enhanced Clients Section with Centered Layout */}
       <section className="py-16 sm:py-20 bg-[#111827]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ScrollReveal direction="up" delay={0} duration={0.8}>
@@ -188,10 +198,32 @@ export default function Home({ onNavigate }: HomeProps) {
             </p>
           </ScrollReveal>
 
-          <div className="flex justify-center">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl">
-              {clients.map((client, index) => (
+          {/* First Row - 3 Cards */}
+          <div className="flex justify-center mb-6 sm:mb-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl">
+              {clients.slice(0, 3).map((client, index) => (
                 <ScrollReveal key={index} direction="up" delay={index * 100} duration={0.6}>
+                  <motion.div 
+                    className="bg-[#1e293b] rounded-2xl p-4 sm:p-6 hover:bg-[#1e3a8a] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
+                    whileHover={{ 
+                      scale: 1.03,
+                      y: -5
+                    }}
+                  >
+                    <client.icon className="text-[#2563eb] mb-3 sm:mb-4" size={isMobile ? 24 : 32} />
+                    <h3 className="text-lg sm:text-xl font-bold text-[#f1f5f9] mb-2">{client.title}</h3>
+                    <p className="text-[#94a3b8] text-xs sm:text-sm">{client.description}</p>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+
+          {/* Second Row - 2 Cards Centered */}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-3xl">
+              {clients.slice(3).map((client, index) => (
+                <ScrollReveal key={index + 3} direction="up" delay={(index + 3) * 100} duration={0.6}>
                   <motion.div 
                     className="bg-[#1e293b] rounded-2xl p-4 sm:p-6 hover:bg-[#1e3a8a] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
                     whileHover={{ 
@@ -255,13 +287,16 @@ export default function Home({ onNavigate }: HomeProps) {
           <ScrollReveal direction="up" delay={250} duration={0.8}>
             <motion.button
               onClick={() => onNavigate('contact')}
-              className="px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium text-base sm:text-lg hover:shadow-[0_0_40px_rgba(37,99,235,0.7)] transition-all duration-300 border border-[#3b82f6] hover:border-[#60a5fa]"
-              whileHover={{ 
-                scale: 1.05,
-              }}
+              className="group relative px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-transparent border-2 border-cyan-400/50 text-[#f1f5f9] font-medium text-base sm:text-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25 backdrop-blur-sm"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Book a Call
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Book a Call</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
             </motion.button>
           </ScrollReveal>
         </div>
