@@ -22,38 +22,6 @@ interface HomeProps {
   onNavigate: (section: string) => void;
 }
 
-// Enhanced scroll reveal component with Framer Motion
-const ScrollReveal = ({ children, direction = "up", delay = 0, duration = 0.6, className = "" }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, threshold: 0.1 });
-  
-  const directions = {
-    up: { y: 50 },
-    down: { y: -50 },
-    left: { x: 50 },
-    right: { x: -50 },
-    fade: { opacity: 0 }
-  };
-  
-  const initial = directions[direction] || { y: 50 };
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ ...initial, opacity: 0 }}
-      animate={isInView ? { x: 0, y: 0, opacity: 1 } : { ...initial, opacity: 0 }}
-      transition={{
-        duration,
-        delay: delay / 1000,
-        ease: [0.25, 0.46, 0.45, 0.94],
-      }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  );
-};
-
 // Mobile detection hook
 const useMobile = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -75,7 +43,7 @@ const useMobile = () => {
 };
 
 export default function Home({ onNavigate }: HomeProps) {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
   const isMobile = useMobile();
   
@@ -112,10 +80,7 @@ export default function Home({ onNavigate }: HomeProps) {
     <div className="min-h-screen overflow-hidden" ref={containerRef}>
       {/* Enhanced Hero Section with Scroll Effects */}
       <section className="relative min-h-screen flex items-center overflow-hidden">
-        <motion.div 
-          className="absolute inset-0 opacity-100"
-          style={{ y: backgroundY }}
-        >
+        <div className="absolute inset-0 opacity-100">
           <Silk
             speed={isMobile ? 4 : 8}
             scale={isMobile ? 0.8 : 1}
@@ -123,38 +88,13 @@ export default function Home({ onNavigate }: HomeProps) {
             noiseIntensity={0.5}
             rotation={0}
           />
-        </motion.div>
+        </div>
         
         <div className="absolute inset-0 bg-gradient-to-br from-[#0f172a] via-[#0d1117] to-[#1e3a8a] opacity-70"></div>
         
-        <motion.div 
-          className="absolute top-20 right-20 w-64 h-64 md:w-96 md:h-96 bg-[#2563eb] rounded-full blur-[120px] opacity-20"
-          style={{ y: blob1Y }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.3, 0.2],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-        ></motion.div>
-        
-        <motion.div 
-          className="absolute bottom-20 left-20 w-64 h-64 md:w-96 md:h-96 bg-[#1e3a8a] rounded-full blur-[120px] opacity-20"
-          style={{ y: blob2Y }}
-          animate={{
-            scale: [1.1, 1, 1.1],
-            opacity: [0.3, 0.2, 0.3],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 1
-          }}
-        ></motion.div>
+        {/* Animated Blobs */}
+        <div className="absolute top-20 right-20 w-64 h-64 md:w-96 md:h-96 bg-[#2563eb] rounded-full blur-[120px] opacity-20 animate-pulseSlow"></div>
+        <div className="absolute bottom-20 left-20 w-64 h-64 md:w-96 md:h-96 bg-[#1e3a8a] rounded-full blur-[120px] opacity-20 animate-pulseSlow2"></div>
 
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 lg:pt-32">
           <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
@@ -177,19 +117,23 @@ export default function Home({ onNavigate }: HomeProps) {
 
             <ScrollReveal direction="up" delay={300} duration={0.8}>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 justify-center lg:justify-start px-4 sm:px-0">
-                <button
+                <motion.button
                   onClick={() => onNavigate('contact')}
                   className="px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all duration-300 text-sm sm:text-base"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   Book a Call
-                </button>
-                <button
+                </motion.button>
+                <motion.button
                   onClick={() => onNavigate('portfolio')}
                   className="group px-6 sm:px-8 md:px-10 py-3 sm:py-4 rounded-full bg-transparent border border-[#8f9eb3] text-[#f1f5f9] font-medium hover:brightness-125 transition-all duration-300 flex items-center justify-center gap-2 text-sm sm:text-base"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   View Our Work
                   <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </button>
+                </motion.button>
               </div>
             </ScrollReveal>
 
@@ -314,7 +258,6 @@ export default function Home({ onNavigate }: HomeProps) {
               className="px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium text-base sm:text-lg hover:shadow-[0_0_40px_rgba(37,99,235,0.7)] transition-all duration-300 border border-[#3b82f6] hover:border-[#60a5fa]"
               whileHover={{ 
                 scale: 1.05,
-                boxShadow: "0 0 40px rgba(37, 99, 235, 0.7)"
               }}
               whileTap={{ scale: 0.95 }}
             >
@@ -323,6 +266,24 @@ export default function Home({ onNavigate }: HomeProps) {
           </ScrollReveal>
         </div>
       </section>
+
+      {/* Add custom animations to global CSS */}
+      <style>{`
+        @keyframes pulseSlow {
+          0%, 100% { opacity: 0.2; transform: scale(1); }
+          50% { opacity: 0.3; transform: scale(1.1); }
+        }
+        @keyframes pulseSlow2 {
+          0%, 100% { opacity: 0.3; transform: scale(1.1); }
+          50% { opacity: 0.2; transform: scale(1); }
+        }
+        .animate-pulseSlow {
+          animation: pulseSlow 8s ease-in-out infinite;
+        }
+        .animate-pulseSlow2 {
+          animation: pulseSlow2 10s ease-in-out infinite;
+        }
+      `}</style>
     </div>
   );
 }
