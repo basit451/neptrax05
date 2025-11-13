@@ -144,6 +144,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                 OUR SERVICES
               </span>
             </h1>
+            
 
           {/* Enhanced Subtitle */}
           <div className="mb-12">
