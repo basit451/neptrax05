@@ -99,7 +99,7 @@ export default function Home({ onNavigate }: HomeProps) {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 lg:pt-32">
           <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
             <ScrollReveal direction="up" delay={100} duration={0.8}>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font text-[#f1f5f9] mb-4 sm:mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font text-[#f1f5f9] mb-4 sm:mb-6 leading-tight">
                 Launch your brand online <br className="hidden sm:block" />
                 <span className="bg-gradient-to-r from-[#2e4fdc] to-[#4da6ff] bg-clip-text text-transparent">
                   with a website built to
