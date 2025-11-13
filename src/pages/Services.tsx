@@ -131,7 +131,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
 
           {/* Option 1: Gradient Flow / Animated Gradient */}
-          {/* <div className="absolute inset-0 bg-gradient-animated"></div> */}
+           <div className="absolute inset-0 bg-gradient-animated"></div>
 
           {/* Option 2: Floating Particles */}
           {/* <div className="absolute inset-0">
@@ -164,7 +164,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* <div className="absolute inset-0 bg-noise-gradient"></div> */}
 
           {/* Option 6: Particle Lines / Network Animation */}
-          <div className="absolute inset-0">
+          {/* <div className="absolute inset-0">
             {Array.from({ length: 20 }).map((_, i) => (
               <div
                 key={i}
@@ -177,7 +177,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               />
             ))}
             <div className="absolute inset-0 bg-gradient-to-br from-transparent via-blue-900/20 to-transparent animate-network-pulse"></div>
-          </div>
+          </div> */}
 
           {/* Option 7: Rotating 3D Shapes */}
           {/* <div className="absolute inset-0">
