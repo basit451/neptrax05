@@ -119,16 +119,11 @@ export default function Home({ onNavigate }: HomeProps) {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-12 sm:mb-16 justify-center lg:justify-start px-4 sm:px-0">
                 <motion.button
                   onClick={() => onNavigate('contact')}
-                  className="group relative px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-transparent border-2 border-cyan-400/50 text-[#f1f5f9] font-medium overflow-hidden transition-all duration-500 hover:scale-105 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25 backdrop-blur-sm text-sm sm:text-base"
+                  className="px-8 sm:px-12 md:px-16 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all duration-300 text-sm sm:text-base"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="relative z-10 flex items-center gap-2">
-                    <span>Book a Call</span>
-                    <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+                  Book a Call
                 </motion.button>
                 
                 <motion.button
@@ -287,16 +282,13 @@ export default function Home({ onNavigate }: HomeProps) {
           <ScrollReveal direction="up" delay={250} duration={0.8}>
             <motion.button
               onClick={() => onNavigate('contact')}
-              className="group relative px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-transparent border-2 border-cyan-400/50 text-[#f1f5f9] font-medium text-base sm:text-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25 backdrop-blur-sm"
-              whileHover={{ scale: 1.05 }}
+              className="px-8 sm:px-10 py-3 sm:py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium text-base sm:text-lg hover:shadow-[0_0_40px_rgba(37,99,235,0.7)] transition-all duration-300 border border-[#3b82f6] hover:border-[#60a5fa]"
+              whileHover={{ 
+                scale: 1.05,
+              }}
               whileTap={{ scale: 0.95 }}
             >
-              <span className="relative z-10 flex items-center gap-2">
-                <span>Book a Call</span>
-                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+              Book a Call
             </motion.button>
           </ScrollReveal>
         </div>
