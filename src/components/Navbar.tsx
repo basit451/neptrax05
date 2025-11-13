@@ -18,6 +18,7 @@ export default function Navbar({ activeSection, onNavigate }: NavbarProps) {
 
   const navItems = [
     { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services' },
     { id: 'portfolio', label: 'Portfolio' },
     { id: 'faqs', label: 'FAQs' },
     { id: 'contact', label: 'Contact' },

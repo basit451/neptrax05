@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
 import Contact from './pages/Contact';
 import About from './pages/About';
@@ -28,6 +29,8 @@ function App() {
     switch (activeSection) {
       case 'home':
         return <Home onNavigate={handleNavigate} />;
+      case 'services':
+        return <Services onNavigate={handleNavigate} />;
       case 'portfolio':
         return <Portfolio />;
       case 'contact':
