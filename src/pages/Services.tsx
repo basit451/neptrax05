@@ -120,17 +120,40 @@ export default function Services({ onNavigate }: ServicesProps) {
     }
   ];
 
-  // Typewriter effect for hero text
-  const TypewriterText = ({ text, delay = 0 }: { text: string; delay?: number }) => (
-    <span 
-      className="inline-block overflow-hidden"
-      style={{
-        animation: `typewriter 2s steps(${text.length}) ${delay}s forwards, blink 0.8s infinite ${delay}s`
-      }}
-    >
-      {text}
-    </span>
-  );
+  // Particle Text Animation Component
+  const ParticleText = ({ text }: { text: string }) => {
+    const [letters, setLetters] = useState<Array<{ char: string; id: number; x: number; y: number; scale: number }>>([]);
+
+    useEffect(() => {
+      const newLetters = text.split('').map((char, index) => ({
+        char,
+        id: index,
+        x: 0,
+        y: 0,
+        scale: 1
+      }));
+      setLetters(newLetters);
+    }, [text]);
+
+    return (
+      <h1 className="text-6xl md:text-8xl font-black mb-4">
+        <span className="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
+          {letters.map((letter, index) => (
+            <span
+              key={letter.id}
+              className="inline-block animate-particleFloat"
+              style={{
+                animationDelay: `${index * 0.1}s`,
+                transform: `translate(${letter.x}px, ${letter.y}px) scale(${letter.scale})`
+              }}
+            >
+              {letter.char === ' ' ? '\u00A0' : letter.char}
+            </span>
+          ))}
+        </span>
+      </h1>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
@@ -195,30 +218,15 @@ export default function Services({ onNavigate }: ServicesProps) {
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           
-          {/* Kinetic Typography with Staggered Letters */}
+          {/* Particle Text Animation */}
           <div className="mb-8 overflow-hidden">
-            <h1 className="text-6xl md:text-8xl font-black mb-4">
-              <span className="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
-                {'OUR SERVICES'.split('').map((char, index) => (
-                  <span
-                    key={index}
-                    className="inline-block animate-letterBounce"
-                    style={{ animationDelay: `${index * 0.1}s` }}
-                  >
-                    {char === ' ' ? '\u00A0' : char}
-                  </span>
-                ))}
-              </span>
-            </h1>
+            <ParticleText text="OUR SERVICES" />
           </div>
 
-          {/* Typewriter Subtitle */}
+          {/* Enhanced Subtitle */}
           <div className="mb-12 overflow-hidden">
-            <p className="text-xl md:text-2xl text-[#94a3b8] font-light max-w-3xl mx-auto leading-relaxed">
-              <TypewriterText 
-                text="Crafting digital excellence through innovative solutions" 
-                delay={1.5}
-              />
+            <p className="text-xl md:text-2xl text-[#94a3b8] font-light max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
+              Crafting digital excellence through innovative solutions
             </p>
           </div>
 
@@ -237,20 +245,10 @@ export default function Services({ onNavigate }: ServicesProps) {
             </button>
           </div>
         </div>
-
-        {/* Animated Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[#3b82f6] text-sm font-light animate-pulse">Scroll to Explore</span>
-            <div className="w-6 h-10 border-2 border-[#3b82f6] rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gradient-to-b from-[#3b82f6] to-[#60a5fa] rounded-full mt-2 animate-scrollIndicator"></div>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* Enhanced Services Showcase with Scroll Animations */}
-      <section className="relative py-20 bg-[#0a0a0a]">
+      <section className="relative py-10 bg-[#0a0a0a]">
         {/* Sticky Navigation with Active Indicator */}
         <div className="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur-md border-b border-[#1e3a8a]/30 py-4">
           <div className="max-w-7xl mx-auto px-6">
@@ -289,7 +287,7 @@ export default function Services({ onNavigate }: ServicesProps) {
               <div
                 key={index}
                 id={`service-${index}`}
-                className={`min-h-screen flex items-center justify-center py-20 ${
+                className={`min-h-[80vh] flex items-center justify-center py-10 ${
                   isEven ? 'flex-row' : 'flex-row-reverse'
                 }`}
               >
@@ -298,22 +296,12 @@ export default function Services({ onNavigate }: ServicesProps) {
                   <div className={`max-w-2xl transform transition-all duration-1000 ${
                     isEven ? 'ml-auto translate-x-0' : 'mr-auto translate-x-0'
                   }`}>
-                    {/* Animated Service Icon */}
-                    <div className="mb-8 transform transition-all duration-500 hover:scale-110 hover:rotate-12">
-                      <div className="relative">
-                        <div className={`w-20 h-20 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center shadow-2xl animate-glow`}>
-                          <Icon className="text-white" size={32} />
-                        </div>
-                        <div className={`absolute inset-0 bg-gradient-to-br ${service.color} rounded-2xl blur-xl opacity-50 animate-pulse`}></div>
-                      </div>
-                    </div>
-
                     {/* Animated Service Title */}
                     <h2 className={`text-5xl font-black bg-gradient-to-r ${service.color} bg-clip-text text-transparent mb-6 transform transition-all duration-700`}>
                       {service.title}
                     </h2>
 
-                    {/* Typewriter Service Description */}
+                    {/* Service Description */}
                     <p className="text-xl text-[#94a3b8] mb-8 leading-relaxed animate-fadeInUp">
                       {service.description}
                     </p>
@@ -331,18 +319,6 @@ export default function Services({ onNavigate }: ServicesProps) {
                         </div>
                       ))}
                     </div>
-
-                    {/* Magnetic Button Effect */}
-                    <button
-                      onClick={() => onNavigate('contact')}
-                      className="group relative px-8 py-4 bg-transparent border-2 border-[#1e3a8a] text-[#f1f5f9] font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:scale-105 magnetic-button"
-                    >
-                      <span className="relative z-10 flex items-center gap-2">
-                        <span>Get {service.title}</span>
-                        <span className="group-hover:translate-x-1 transition-transform">→</span>
-                      </span>
-                      <div className={`absolute inset-0 bg-gradient-to-r ${service.color} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left`}></div>
-                    </button>
                   </div>
                 </div>
 
@@ -353,7 +329,7 @@ export default function Services({ onNavigate }: ServicesProps) {
                   }`}>
                     {/* Main Visual Container with 3D Effect */}
                     <div className={`relative bg-gradient-to-br ${service.color} rounded-3xl p-8 transform transition-all duration-500 hover:rotate-3 hover:shadow-2xl service-card-3d`}>
-                      <div className="bg-[#0a0a0a] rounded-2xl p-8 h-96 flex items-center justify-center relative overflow-hidden">
+                      <div className="bg-[#0a0a0a] rounded-2xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
                         {/* Animated Background Pattern */}
                         <div 
                           className="absolute inset-0 opacity-10"
@@ -386,42 +362,6 @@ export default function Services({ onNavigate }: ServicesProps) {
         </div>
       </section>
 
-      {/* Enhanced CTA Section with Particle Background */}
-      <section className="relative py-32 bg-gradient-to-br from-[#0a0a0a] via-[#0f172a] to-[#1e3a8a] overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-full h-full">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-[#3b82f6] rounded-full blur-3xl opacity-10 animate-pulse-slow"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#1e3a8a] rounded-full blur-3xl opacity-15 animate-pulse-slower"></div>
-          </div>
-        </div>
-
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          {/* Animated Heading */}
-          <h2 className="text-5xl md:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-[#cbd5e1] to-[#94a3b8] mb-8 animate-glowText">
-            READY TO BEGIN?
-          </h2>
-          
-          {/* Animated Subtitle */}
-          <p className="text-xl text-[#94a3b8] mb-12 max-w-2xl mx-auto leading-relaxed animate-fadeInUp">
-            Let's transform your digital presence with our premium services. Get started with a free consultation today.
-          </p>
-
-          {/* Super Button with Multiple Effects */}
-          <button
-            onClick={() => onNavigate('contact')}
-            className="group relative px-16 py-5 rounded-full bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] text-white font-bold text-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-2xl super-button"
-          >
-            <span className="relative z-10 flex items-center gap-3">
-              <span>Start Your Project Now</span>
-              <span className="group-hover:translate-x-2 transition-transform duration-300">🚀</span>
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] blur-lg opacity-0 group-hover:opacity-50 transition-opacity duration-300 -z-10"></div>
-          </button>
-        </div>
-      </section>
-
       {/* Animation Styles */}
       <style jsx>{`
         @keyframes floatParticle {
@@ -443,30 +383,22 @@ export default function Services({ onNavigate }: ServicesProps) {
           }
         }
 
-        @keyframes letterBounce {
+        @keyframes particleFloat {
           0%, 100% {
-            transform: translateY(0) scale(1);
+            transform: translate(0, 0) scale(1) rotate(0deg);
+            opacity: 1;
+          }
+          25% {
+            transform: translate(5px, -8px) scale(1.1) rotate(2deg);
+            opacity: 0.8;
           }
           50% {
-            transform: translateY(-10px) scale(1.1);
+            transform: translate(-3px, 6px) scale(0.95) rotate(-1deg);
+            opacity: 0.9;
           }
-        }
-
-        @keyframes typewriter {
-          from {
-            width: 0;
-          }
-          to {
-            width: 100%;
-          }
-        }
-
-        @keyframes blink {
-          0%, 50% {
-            border-color: transparent;
-          }
-          51%, 100% {
-            border-color: #3b82f6;
+          75% {
+            transform: translate(-5px, -4px) scale(1.05) rotate(1deg);
+            opacity: 0.85;
           }
         }
 
@@ -557,17 +489,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           }
         }
 
-        @keyframes scrollIndicator {
-          0% {
-            transform: translateY(0);
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(20px);
-            opacity: 0;
-          }
-        }
-
         @keyframes pingSlow {
           0% {
             transform: scale(1);
@@ -601,17 +522,16 @@ export default function Services({ onNavigate }: ServicesProps) {
           }
         }
 
+        .animate-particleFloat {
+          animation: particleFloat 3s ease-in-out infinite;
+        }
+
         .animate-orbFloat {
           animation: orbFloat 8s ease-in-out infinite;
         }
 
         .animate-orbFloatReverse {
           animation: orbFloatReverse 10s ease-in-out infinite;
-        }
-
-        .animate-letterBounce {
-          animation: letterBounce 2s ease-in-out infinite;
-          display: inline-block;
         }
 
         .animate-glow {
@@ -634,10 +554,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           animation: bounceSlow 3s ease-in-out infinite;
         }
 
-        .animate-scrollIndicator {
-          animation: scrollIndicator 2s ease-in-out infinite;
-        }
-
         .animate-pingSlow {
           animation: pingSlow 3s ease-out infinite;
         }
@@ -650,16 +566,8 @@ export default function Services({ onNavigate }: ServicesProps) {
           animation: fadeInUp 1s ease-out forwards;
         }
 
-        .magnetic-button:hover {
-          transform: scale(1.05) translateY(-2px);
-        }
-
         .service-card-3d:hover {
           transform: perspective(1000px) rotateY(5deg) rotateX(5deg) scale(1.02);
-        }
-
-        .super-button:hover {
-          box-shadow: 0 0 50px rgba(59, 130, 246, 0.5);
         }
 
         .hide-scrollbar {
