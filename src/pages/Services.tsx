@@ -238,17 +238,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div>
         </div>
 
-        {/* Animated Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="flex flex-col items-center gap-2">
-            <span className="text-[#3b82f6] text-sm font-light animate-pulse">Scroll to Explore</span>
-            <div className="w-6 h-10 border-2 border-[#3b82f6] rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-gradient-to-b from-[#3b82f6] to-[#60a5fa] rounded-full mt-2 animate-scrollIndicator"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Enhanced Services Showcase with Scroll Animations */}
       <section className="relative py-20 bg-[#0a0a0a]">
         {/* Sticky Navigation with Active Indicator */}
