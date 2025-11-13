@@ -96,7 +96,7 @@ export default function Home({ onNavigate }: HomeProps) {
         <div className="absolute top-20 right-20 w-64 h-64 md:w-96 md:h-96 bg-[#2563eb] rounded-full blur-[120px] opacity-20 animate-pulseSlow"></div>
         <div className="absolute bottom-20 left-20 w-64 h-64 md:w-96 md:h-96 bg-[#1e3a8a] rounded-full blur-[120px] opacity-20 animate-pulseSlow2"></div>
 
-        <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 lg:pt-32">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-16 lg:pt-32">
           <div className="max-w-3xl mx-auto lg:mx-0 text-center lg:text-left">
             <ScrollReveal direction="up" delay={100} duration={0.8}>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font text-[#f1f5f9] mb-4 sm:mb-6 leading-tight">
