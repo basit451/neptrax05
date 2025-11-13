@@ -1,286 +1,321 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Services — Reimagined</title>
-  <meta name="description" content="Improved Services page — interactive showcase of 12 services. Single-file HTML/CSS/JS." />
-  <style>
-    /* Reset and useful defaults */
-    :root{
-      --bg:#0f1724; --card:#0b1320; --accent:#5eead4; --muted:#94a3b8; --glass: rgba(255,255,255,0.04);
-      --maxw:1200px;
-      --radius:18px;
-      --ff:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:var(--ff); background:linear-gradient(180deg,#071020 0%, #081024 50%, #081728 100%); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-    }
-    .container{max-width:var(--maxw);margin:0 auto;padding:48px 20px}
+import { useState, useEffect } from 'react';
+import {
+  Palette,
+  Code,
+  Search,
+  Target,
+  Layers,
+  Wrench,
+  TrendingUp,
+  Zap,
+  BarChart3,
+  Shield
+} from 'lucide-react';
+import ScrollReveal from '../components/ScrollReveal';
 
-    /* Header */
-    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
-    .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;font-weight:700;color:#052;}
-    nav a{color:var(--muted);text-decoration:none;margin-left:18px;font-weight:600}
-    nav a.cta{background:linear-gradient(90deg,#60a5fa,#7c3aed);padding:10px 14px;border-radius:12px;color:white}
+interface ServicesProps {
+  onNavigate: (section: string) => void;
+}
 
-    /* Hero */
-    .hero{display:grid;grid-template-columns:1fr 420px;gap:36px;align-items:center;margin-top:36px}
-    .hero-left h1{font-size:48px;line-height:1;margin:0 0 12px}
-    .hero-left p{color:var(--muted);margin:0 0 18px}
-    .actions{display:flex;gap:12px}
-    .btn{padding:12px 16px;border-radius:12px;font-weight:700;border:0;cursor:pointer}
-    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--accent)}
-    .btn.primary{background:linear-gradient(90deg,var(--accent),#60a5fa);color:#042}
+interface Particle {
+  id: number;
+  left: number;
+  top: number;
+  delay: number;
+  duration: number;
+}
 
-    /* Showcase - replaced cards with interactive horizontal panels */
-    .showcase{margin-top:40px}
-    .showcase-intro{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
-    .filters{display:flex;gap:8px;align-items:center}
-    .chip{padding:8px 12px;border-radius:999px;background:var(--glass);color:var(--muted);cursor:pointer;font-weight:600}
+export default function Services({ onNavigate }: ServicesProps) {
+  const [particles, setParticles] = useState<Particle[]>([]);
 
-    /* Horizontal snapping scroller */
-    .scroller-wrap{position:relative;padding:18px 0}
-    .scroller{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:12px}
-    .scroller::-webkit-scrollbar{height:10px}
-    .scroller::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.08);border-radius:8px}
-    .panel{min-width:320px;flex:0 0 320px;scroll-snap-align:center;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:16px;padding:18px;border:1px solid rgba(255,255,255,0.03);backdrop-filter:blur(6px);position:relative}
-    .panel .eyebrow{font-size:13px;color:var(--muted);font-weight:700}
-    .panel h3{margin:8px 0 10px;font-size:20px}
-    .panel p{color:var(--muted);font-size:14px;line-height:1.45}
-    .panel .meta{position:absolute;right:12px;top:12px;color:var(--muted);font-weight:700}
+  useEffect(() => {
+    const newParticles = Array.from({ length: 40 }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: Math.random() * 100,
+      delay: Math.random() * 2,
+      duration: 8 + Math.random() * 6,
+    }));
+    setParticles(newParticles);
+  }, []);
 
-    /* Large hero panel for featured service */
-    .feature{display:grid;grid-template-columns:1fr 340px;gap:20px;margin-top:36px;background:linear-gradient(90deg, rgba(95,234,212,0.04), rgba(96,165,250,0.02));padding:22px;border-radius:16px;border:1px solid rgba(255,255,255,0.03)}
-    .art{height:220px;border-radius:12px;background:linear-gradient(135deg,#0ea5a4 0%, #60a5fa 100%);display:flex;align-items:center;justify-content:center;font-size:48px;color:#042}
+  const servicesList = [
+    {
+      title: 'Web Design',
+      description: 'Beautiful, modern interfaces that captivate your audience',
+      icon: Palette,
+      details: 'Custom designs tailored to your brand identity and user needs'
+    },
+    {
+      title: 'Web Development',
+      description: 'Fast, responsive websites built with cutting-edge technology',
+      icon: Code,
+      details: 'Performance-optimized development for seamless user experiences'
+    },
+    {
+      title: 'SEO Optimization',
+      description: 'Higher search rankings and increased organic visibility',
+      icon: Search,
+      details: 'Strategic optimization to drive qualified traffic to your site'
+    },
+    {
+      title: 'Geo Targeting',
+      description: 'Local market reach and location-based marketing strategies',
+      icon: Target,
+      details: 'Targeted campaigns designed for local business growth'
+    },
+    {
+      title: 'UI/UX Design',
+      description: 'User-centered experiences that drive engagement and conversions',
+      icon: Layers,
+      details: 'Research-backed design solutions that prioritize user needs'
+    },
+    {
+      title: 'Website Maintenance',
+      description: 'Ongoing support and updates to keep your site running smoothly',
+      icon: Wrench,
+      details: 'Proactive maintenance and continuous improvement services'
+    },
+    {
+      title: 'Performance Analytics',
+      description: 'Data-driven insights to measure and improve your digital presence',
+      icon: TrendingUp,
+      details: 'Comprehensive reporting and actionable recommendations'
+    },
+    {
+      title: 'E-Commerce Solutions',
+      description: 'Complete online store setup and optimization for maximum sales',
+      icon: BarChart3,
+      details: 'Integrated payment systems and inventory management'
+    },
+    {
+      title: 'Security & SSL',
+      description: 'Robust security measures to protect your business and customers',
+      icon: Shield,
+      details: 'Enterprise-grade security and compliance standards'
+    },
+    {
+      title: 'Consultation & Strategy',
+      description: 'Expert guidance to align your digital strategy with business goals',
+      icon: Zap,
+      details: 'Strategic planning and implementation roadmaps'
+    },
+  ];
 
-    /* Services grid fallback for smaller screens */
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr;}
-      .feature{grid-template-columns:1fr}
-      .scroller{padding:12px}
-      .panel{min-width:260px;flex:0 0 260px}
-    }
-
-    footer{margin-top:56px;padding:28px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.08), transparent);display:flex;justify-content:space-between;align-items:center}
-
-    /* small interactive helpers */
-    .kbd{background:#021827;padding:6px 8px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);font-weight:700;color:var(--muted)}
-    .dot{width:8px;height:8px;border-radius:99px;background:var(--accent);display:inline-block;margin-right:8px}
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <div class="brand"><div class="logo">DT</div><div>
-        <div style="font-weight:800">Design — Reimagined</div>
-        <div style="font-size:12px;color:var(--muted)">Services showcase</div>
-      </div></div>
-      <nav>
-        <a href="#">Home</a>
-        <a href="#services" style="margin-left:12px">Services</a>
-        <a href="#work">Work</a>
-        <a href="#contact" class="cta">Get a Demo</a>
-      </nav>
-    </header>
-
-    <section class="hero">
-      <div class="hero-left">
-        <h1>Services crafted for growth</h1>
-        <p>We replaced tired cards with a tactile, scroll‑snapped showcase — explore 12 curated services, preview work and read quick outcomes.</p>
-        <div class="actions">
-          <button class="btn primary" id="demoBtn">Book demo</button>
-          <button class="btn ghost">Browse portfolio</button>
-        </div>
-      </div>
-
-      <div class="hero-right" aria-hidden="true">
-        <div style="background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));padding:16px;border-radius:14px;">
-          <strong style="display:block">Why this layout?</strong>
-          <p style="color:var(--muted);margin:8px 0 0">Large, tactile panels help convey service outcomes at a glance. Users swipe, explore and focus on what matters.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="showcase">
-      <div class="showcase-intro">
-        <h2 style="margin:0">Our Services (12)</h2>
-        <div class="filters">
-          <div class="chip" data-filter="all">All</div>
-          <div class="chip" data-filter="design">Design</div>
-          <div class="chip" data-filter="dev">Development</div>
-          <div class="chip" data-filter="growth">Growth</div>
-        </div>
-      </div>
-
-      <div class="scroller-wrap">
-        <div class="scroller" id="scroller">
-
-          <!-- Each "panel" replaces a card. Panels are larger, tactile modules. -->
-          <article class="panel" data-tags="design">
-            <div class="eyebrow">Branding</div>
-            <h3>Identity & logo systems</h3>
-            <div class="meta">Featured</div>
-            <p>Create memorable brands with flexible identity systems, logo families and usage guidelines for web and print.</p>
-          </article>
-
-          <article class="panel" data-tags="design">
-            <div class="eyebrow">UX</div>
-            <h3>Product & UX design</h3>
-            <p>User flows, low/high fidelity prototypes and research-led design that reduces friction and improves conversion.</p>
-          </article>
-
-          <article class="panel" data-tags="design">
-            <div class="eyebrow">Visuals</div>
-            <h3>Illustration & graphics</h3>
-            <p>Custom illustration systems, iconography and expressive graphics to support storytelling.</p>
-          </article>
-
-          <article class="panel" data-tags="dev">
-            <div class="eyebrow">Web</div>
-            <h3>Web Design & Frontend</h3>
-            <p>Responsive websites, accessible interactions and performance-first frontend engineering.</p>
-          </article>
-
-          <article class="panel" data-tags="dev">
-            <div class="eyebrow">Apps</div>
-            <h3>Mobile Apps & PWA</h3>
-            <p>Native-like progressive web apps and cross-platform interfaces with smooth animations.</p>
-          </article>
-
-          <article class="panel" data-tags="dev">
-            <div class="eyebrow">E‑commerce</div>
-            <h3>Commerce & Checkout</h3>
-            <p>Conversion-focused product pages, fast checkouts and integrations (Shopify, BigCommerce, custom).</p>
-          </article>
-
-          <article class="panel" data-tags="growth">
-            <div class="eyebrow">Content</div>
-            <h3>Content Strategy</h3>
-            <p>Content pillars, editorial calendars and on-page content that drives search and engagement.</p>
-          </article>
-
-          <article class="panel" data-tags="growth">
-            <div class="eyebrow">SEO</div>
-            <h3>SEO & Performance</h3>
-            <p>Technical SEO, speed audits and structured data to improve visibility and reduce bounce.</p>
-          </article>
-
-          <article class="panel" data-tags="growth">
-            <div class="eyebrow">Marketing</div>
-            <h3>Growth Marketing</h3>
-            <p>Acquisition strategy, paid social campaigns and analytics-driven creative testing.</p>
-          </article>
-
-          <article class="panel" data-tags="design">
-            <div class="eyebrow">Motion</div>
-            <h3>Motion & Video</h3>
-            <p>Short form video, hero animations and explainer motion to lift your storytelling.</p>
-          </article>
-
-          <article class="panel" data-tags="dev">
-            <div class="eyebrow">Integrations</div>
-            <h3>API & Platform Integrations</h3>
-            <p>Connect tools, build webhooks and automate processes to streamline product operations.</p>
-          </article>
-
-          <article class="panel" data-tags="growth">
-            <div class="eyebrow">Support</div>
-            <h3>Retainer & Support</h3>
-            <p>Ongoing creative and dev support with predictable SLAs and a dedicated strategic partner.</p>
-          </article>
-
+  return (
+    <div className="min-h-screen">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+        <div className="absolute inset-0">
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              className="absolute w-1 h-1 rounded-full"
+              style={{
+                backgroundColor: 'rgba(30, 58, 138, 0.4)',
+                left: `${particle.left}%`,
+                top: `${particle.top}%`,
+                animation: `float ${particle.duration}s infinite ease-in-out`,
+                animationDelay: `${particle.delay}s`,
+              }}
+            />
+          ))}
         </div>
 
-        <!-- simple controls -->
-        <div style="display:flex;gap:12px;align-items:center;margin-top:12px">
-          <button class="kbd" id="prev">◀</button>
-          <button class="kbd" id="next">▶</button>
-          <div style="margin-left:12px;color:var(--muted)"><span class="dot"></span>Drag or use arrows to explore</div>
-        </div>
-      </div>
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d1117] to-[#1a1a2e] opacity-80"></div>
 
-      <!-- Feature/preview area that updates when panels are focused -->
-      <div class="feature" id="feature">
-        <div style="padding:8px">
-          <h3 id="featureTitle">Featured Service</h3>
-          <p id="featureDesc" style="color:var(--muted);">Hover or focus a panel to preview a richer description and suggested outcomes.</p>
-          <div style="margin-top:12px;display:flex;gap:10px;align-items:center">
-            <button class="btn primary">Start Project</button>
-            <button class="btn ghost">View Case Study</button>
+        <div className="absolute top-32 right-32 w-96 h-96 bg-[#1e3a8a] rounded-full blur-[120px] opacity-15 animate-blobSlow"></div>
+        <div className="absolute bottom-32 left-32 w-96 h-96 bg-[#2563eb] rounded-full blur-[120px] opacity-15 animate-blobSlow2"></div>
+
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
+          <ScrollReveal direction="up" delay={0} depth={2}>
+            <h1 className="text-5xl md:text-7xl font-bold text-[#f1f5f9] mb-6 leading-tight">
+              Our{' '}
+              <span className="bg-gradient-to-r from-[#1e3a8a] via-[#2563eb] to-[#60a5fa] bg-clip-text text-transparent">
+                Services
+              </span>
+            </h1>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={150} depth={2}>
+            <p className="text-xl md:text-2xl text-[#abbcd4] mb-8 max-w-3xl mx-auto leading-relaxed">
+              Crafting digital experiences that inspire and convert
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal direction="fade" delay={300} depth={2}>
+            <div className="flex gap-4 justify-center flex-wrap">
+              <button
+                onClick={() => onNavigate('contact')}
+                className="px-8 py-3 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium hover:scale-105 hover:shadow-[0_0_30px_rgba(37,99,235,0.6)] transition-all"
+              >
+                Get Started
+              </button>
+              <button
+                onClick={() => onNavigate('portfolio')}
+                className="px-8 py-3 rounded-full border border-[#8f9eb3] text-[#f1f5f9] font-medium hover:bg-[#1e3a8a] hover:border-[#2563eb] transition-all"
+              >
+                View Portfolio
+              </button>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section className="py-20 bg-[#0d1117]">
+        <div className="max-w-7xl mx-auto px-6">
+          <ScrollReveal direction="up" delay={0} depth={1}>
+            <h2 className="text-4xl font-bold text-[#f1f5f9] text-center mb-16">
+              Comprehensive Solutions
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {servicesList.map((service, index) => {
+              const Icon = service.icon;
+              return (
+                <ScrollReveal
+                  key={index}
+                  direction={index % 2 === 0 ? 'up' : 'up'}
+                  delay={index * 80}
+                  depth={2}
+                >
+                  <div className="group relative h-full">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1e3a8a] to-transparent opacity-0 group-hover:opacity-20 rounded-2xl blur-xl transition-opacity duration-300"></div>
+                    <div className="relative bg-[#1e293b] rounded-2xl p-8 h-full hover:bg-[#1e3a8a] transition-all duration-300 hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] border border-[#334155] group-hover:border-[#2563eb]">
+                      <Icon className="text-[#2563eb] mb-4 group-hover:text-[#60a5fa] transition-colors" size={36} />
+                      <h3 className="text-2xl font-bold text-[#f1f5f9] mb-3 group-hover:text-[#60a5fa] transition-colors">
+                        {service.title}
+                      </h3>
+                      <p className="text-[#abbcd4] mb-4 text-sm leading-relaxed">
+                        {service.description}
+                      </p>
+                      <p className="text-[#8f9eb3] text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        {service.details}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              );
+            })}
           </div>
         </div>
-        <div class="art">★</div>
-      </div>
+      </section>
 
-    </section>
+      <section className="py-20 bg-gradient-to-br from-[#0f172a] via-[#0d1117] to-[#1e3a8a]">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <ScrollReveal direction="up" delay={0} depth={2}>
+              <div>
+                <h2 className="text-4xl font-bold text-[#f1f5f9] mb-6">
+                  Why Choose Us?
+                </h2>
+                <ul className="space-y-4">
+                  {[
+                    'Custom solutions tailored to your business needs',
+                    'Performance-focused approach with measurable results',
+                    'Dedicated support throughout your project',
+                    'Latest technologies and best practices',
+                    'Transparent communication and regular updates',
+                    '100% client satisfaction guarantee'
+                  ].map((item, index) => (
+                    <li key={index} className="flex items-start gap-3">
+                      <div className="w-2 h-2 mt-2 rounded-full bg-gradient-to-r from-[#2563eb] to-[#60a5fa] flex-shrink-0"></div>
+                      <span className="text-[#abbcd4]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </ScrollReveal>
 
-    <footer>
-      <div>© 2025 Your Agency — Built with ❤️</div>
-      <div style="color:var(--muted)">Questions? <a href="#contact">Contact us</a></div>
-    </footer>
-  </div>
+            <ScrollReveal direction="up" delay={200} depth={2}>
+              <div className="space-y-6">
+                <div className="bg-[#1e293b] rounded-2xl p-6 border border-[#334155] hover:border-[#2563eb] transition-colors">
+                  <h3 className="text-lg font-bold text-[#f1f5f9] mb-2">Quick Turnaround</h3>
+                  <p className="text-[#abbcd4] text-sm">Most projects completed within 2-4 weeks</p>
+                </div>
+                <div className="bg-[#1e293b] rounded-2xl p-6 border border-[#334155] hover:border-[#2563eb] transition-colors">
+                  <h3 className="text-lg font-bold text-[#f1f5f9] mb-2">Expert Team</h3>
+                  <p className="text-[#abbcd4] text-sm">5+ years of industry experience and proven track record</p>
+                </div>
+                <div className="bg-[#1e293b] rounded-2xl p-6 border border-[#334155] hover:border-[#2563eb] transition-colors">
+                  <h3 className="text-lg font-bold text-[#f1f5f9] mb-2">Ongoing Support</h3>
+                  <p className="text-[#abbcd4] text-sm">Continuous maintenance and optimization included</p>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
 
-  <script>
-    // Minimal interactive JS: controls, filters and feature preview
-    (function(){
-      const scroller = document.getElementById('scroller');
-      const panels = Array.from(document.querySelectorAll('.panel'));
-      const prev = document.getElementById('prev');
-      const next = document.getElementById('next');
-      const featureTitle = document.getElementById('featureTitle');
-      const featureDesc = document.getElementById('featureDesc');
-      const chips = Array.from(document.querySelectorAll('.chip'));
+      <section className="py-20 bg-[#0d1117]">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <ScrollReveal direction="up" delay={0} depth={2}>
+            <h2 className="text-4xl font-bold text-[#f1f5f9] mb-6">
+              Ready to Transform Your Digital Presence?
+            </h2>
+          </ScrollReveal>
 
-      let idx = 0;
-      function scrollToIndex(i){
-        const p = panels[i];
-        if(!p) return;
-        p.scrollIntoView({behavior:'smooth',inline:'center'});
-        panels.forEach(el=>el.style.boxShadow='');
-        p.style.boxShadow='0 8px 30px rgba(2,6,23,0.6)';
-        // update feature
-        featureTitle.textContent = p.querySelector('h3').textContent;
-        featureDesc.textContent = p.querySelector('p').textContent;
-      }
+          <ScrollReveal direction="fade" delay={150} depth={2}>
+            <p className="text-[#94a3b8] text-lg mb-8">
+              Let's discuss which services are right for your business goals
+            </p>
+          </ScrollReveal>
 
-      prev.addEventListener('click', ()=>{ idx = Math.max(0, idx-1); scrollToIndex(idx);});
-      next.addEventListener('click', ()=>{ idx = Math.min(panels.length-1, idx+1); scrollToIndex(idx);});
+          <ScrollReveal direction="up" delay={300} depth={2}>
+            <button
+              onClick={() => onNavigate('contact')}
+              className="px-12 py-4 rounded-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] text-[#f1f5f9] font-medium text-lg hover:scale-105 hover:shadow-[0_0_40px_rgba(37,99,235,0.7)] transition-all"
+            >
+              Book a Consultation
+            </button>
+          </ScrollReveal>
+        </div>
+      </section>
 
-      panels.forEach((p, i)=>{
-        p.addEventListener('mouseenter', ()=>{ idx=i; scrollToIndex(i); });
-        p.addEventListener('focus', ()=>{ idx=i; scrollToIndex(i); });
-        p.tabIndex = 0;
-      });
+      <style>{`
+        @keyframes float {
+          0%, 100% {
+            transform: translate(0, 0);
+            opacity: 0.3;
+          }
+          50% {
+            transform: translate(30px, -30px);
+            opacity: 0.6;
+          }
+        }
 
-      // Filtering
-      chips.forEach(ch=>{
-        ch.addEventListener('click', ()=>{
-          const filter = ch.dataset.filter;
-          chips.forEach(x=>x.classList.remove('active'));
-          ch.classList.add('active');
-          panels.forEach((p)=>{
-            if(filter==='all') p.style.display='block';
-            else{
-              p.style.display = p.dataset.tags.includes(filter)?'block':'none';
-            }
-          });
-        });
-      });
+        @keyframes blobSlow {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(30px, -50px) scale(1.1);
+          }
+          66% {
+            transform: translate(-20px, 20px) scale(0.9);
+          }
+        }
 
-      // Keyboard arrows for accessibility
-      window.addEventListener('keydown', (e)=>{
-        if(e.key==='ArrowRight') next.click();
-        if(e.key==='ArrowLeft') prev.click();
-      });
+        @keyframes blobSlow2 {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(-30px, 50px) scale(0.9);
+          }
+          66% {
+            transform: translate(20px, -20px) scale(1.1);
+          }
+        }
 
-      // Initial focus
-      scrollToIndex(0);
+        .animate-blobSlow {
+          animation: blobSlow 8s infinite;
+        }
 
-    })();
-  </script>
-</body>
-</html>
+        .animate-blobSlow2 {
+          animation: blobSlow2 8s infinite;
+        }
+      `}</style>
+    </div>
+  );
+}
