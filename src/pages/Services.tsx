@@ -171,13 +171,37 @@ export default function Services({ onNavigate }: ServicesProps) {
           <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] rounded-full blur-3xl opacity-20 animate-orbFloat"></div>
           <div className="absolute bottom-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full blur-3xl opacity-15 animate-orbFloatReverse"></div>
           
+          {/* ==================== ANIMATION OPTIONS ==================== */}
+          {/* UNCOMMENT ONE OPTION AT A TIME TO TEST */}
 
-          {/* Floating Geometric Shapes */}
-<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-  <div className="w-20 h-20 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-lg animate-float-slow opacity-30 rotate-45"></div>
-  <div className="w-16 h-16 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] rounded-full animate-float-medium opacity-40 absolute top-1/4 left-1/4 animation-delay-1000"></div>
-  <div className="w-24 h-24 bg-gradient-to-r from-[#60a5fa] to-[#93c5fd] rounded-lg animate-float-fast opacity-25 absolute bottom-1/4 right-1/4 animation-delay-2000 rotate-12"></div>
-</div>
+          {/* Option 1: Floating Geometric Shapes */}
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-20 h-20 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-lg animate-float-slow opacity-30 rotate-45"></div>
+            <div className="w-16 h-16 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] rounded-full animate-float-medium opacity-40 absolute top-1/4 left-1/4 animation-delay-1000"></div>
+            <div className="w-24 h-24 bg-gradient-to-r from-[#60a5fa] to-[#93c5fd] rounded-lg animate-float-fast opacity-25 absolute bottom-1/4 right-1/4 animation-delay-2000 rotate-12"></div>
+          </div> */}
+
+          {/* Option 2: Morphing Blob */}
+          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-64 h-64 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] animate-morphing-blob opacity-20 blur-xl"></div>
+          </div>
+
+          {/* Option 3: Sparkle Field */}
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-2 h-2 bg-white rounded-full animate-sparkle opacity-60"></div>
+            <div className="w-1 h-1 bg-[#60a5fa] rounded-full animate-sparkle opacity-80 animation-delay-200 absolute top-10 left-20"></div>
+            <div className="w-1 h-1 bg-[#3b82f6] rounded-full animate-sparkle opacity-70 animation-delay-400 absolute bottom-10 right-20"></div>
+            <div className="w-1 h-1 bg-[#93c5fd] rounded-full animate-sparkle opacity-90 animation-delay-600 absolute top-20 right-10"></div>
+          </div> */}
+
+          {/* Option 4: Floating Orbs Cluster */}
+          {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+            <div className="w-12 h-12 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full animate-float-orb opacity-30"></div>
+            <div className="w-8 h-8 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] rounded-full animate-float-orb opacity-40 animation-delay-300 absolute top-4 left-16"></div>
+            <div className="w-6 h-6 bg-gradient-to-r from-[#60a5fa] to-[#93c5fd] rounded-full animate-float-orb opacity-50 animation-delay-600 absolute bottom-8 right-12"></div>
+          </div> */}
+
+        </div>
 
         {/* Main Content with Entrance Animations */}
         <div className={`relative z-10 max-w-6xl mx-auto px-6 text-center transition-all duration-1000 ${
@@ -453,55 +477,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           }
         }
 
-        @keyframes pingSlower {
-          0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.25;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(2.5);
-            opacity: 0;
-          }
-        }
-
-        @keyframes pingSlowest {
-          0% {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 0.2;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(3);
-            opacity: 0;
-          }
-        }
-
-        @keyframes spin-slow {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
-        }
-
-        @keyframes spin-slower {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(-360deg);
-          }
-        }
-
-        @keyframes spin-medium {
-          from {
-            transform: translate(-50%, -50%) rotate(0deg);
-          }
-          to {
-            transform: translate(-50%, -50%) rotate(360deg);
-          }
-        }
-
         @keyframes fadeInUp {
           from {
             opacity: 0;
@@ -510,6 +485,76 @@ export default function Services({ onNavigate }: ServicesProps) {
           to {
             opacity: 1;
             transform: translateY(0);
+          }
+        }
+
+        /* New Animation Styles */
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-20px) rotate(180deg);
+          }
+        }
+
+        @keyframes float-medium {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-15px) rotate(90deg);
+          }
+        }
+
+        @keyframes float-fast {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotate(45deg);
+          }
+        }
+
+        @keyframes morphing-blob {
+          0%, 100% {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transform: translate(-50%, -50%) scale(1);
+          }
+          25% {
+            border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            transform: translate(-50%, -50%) scale(1.1);
+          }
+          50% {
+            border-radius: 50% 60% 30% 60% / 60% 50% 60% 40%;
+            transform: translate(-50%, -50%) scale(0.9);
+          }
+          75% {
+            border-radius: 40% 60% 70% 30% / 60% 40% 60% 40%;
+            transform: translate(-50%, -50%) scale(1.05);
+          }
+        }
+
+        @keyframes sparkle {
+          0%, 100% {
+            opacity: 0;
+            transform: scale(0) rotate(0deg);
+          }
+          50% {
+            opacity: 1;
+            transform: scale(1) rotate(180deg);
+          }
+        }
+
+        @keyframes float-orb {
+          0%, 100% {
+            transform: translate(0, 0) scale(1);
+          }
+          33% {
+            transform: translate(10px, -15px) scale(1.1);
+          }
+          66% {
+            transform: translate(-5px, 10px) scale(0.9);
           }
         }
 
@@ -545,52 +590,57 @@ export default function Services({ onNavigate }: ServicesProps) {
           animation: pingSlow 3s ease-out infinite;
         }
 
-        .animate-pingSlower {
-          animation: pingSlower 4s ease-out infinite;
-        }
-
-        .animate-pingSlowest {
-          animation: pingSlowest 5s ease-out infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
-        }
-
-        .animate-spin-slower {
-          animation: spin-slower 12s linear infinite;
-        }
-
-        .animate-spin-medium {
-          animation: spin-medium 6s linear infinite;
-        }
-
         .animate-fadeInUp {
           animation: fadeInUp 1s ease-out forwards;
         }
 
-        .animation-delay-700 {
-          animation-delay: 700ms;
+        /* New Animation Classes */
+        .animate-float-slow {
+          animation: float-slow 6s ease-in-out infinite;
+        }
+
+        .animate-float-medium {
+          animation: float-medium 4s ease-in-out infinite;
+        }
+
+        .animate-float-fast {
+          animation: float-fast 3s ease-in-out infinite;
+        }
+
+        .animate-morphing-blob {
+          animation: morphing-blob 8s ease-in-out infinite;
+        }
+
+        .animate-sparkle {
+          animation: sparkle 3s ease-in-out infinite;
+        }
+
+        .animate-float-orb {
+          animation: float-orb 5s ease-in-out infinite;
+        }
+
+        .animation-delay-200 {
+          animation-delay: 200ms;
+        }
+
+        .animation-delay-300 {
+          animation-delay: 300ms;
+        }
+
+        .animation-delay-400 {
+          animation-delay: 400ms;
+        }
+
+        .animation-delay-600 {
+          animation-delay: 600ms;
         }
 
         .animation-delay-1000 {
           animation-delay: 1000ms;
         }
 
-        .animation-delay-1400 {
-          animation-delay: 1400ms;
-        }
-
         .animation-delay-2000 {
           animation-delay: 2000ms;
-        }
-
-        .animation-delay-3000 {
-          animation-delay: 3000ms;
-        }
-
-        .animation-reverse {
-          animation-direction: reverse;
         }
 
         .service-card-3d:hover {
