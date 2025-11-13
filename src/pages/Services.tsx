@@ -189,14 +189,14 @@ export default function Services({ onNavigate }: ServicesProps) {
           {/* <div className="absolute inset-0 bg-stripes-animated"></div> */}
 
           {/* Option 9: Parallax Blur Layers */}
-           <div className="absolute inset-0">
+           {/* <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-blue-900/30 animate-parallax-slow opacity-40"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-900/20 via-transparent to-blue-900/20 animate-parallax-medium opacity-30"></div>
             <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/25 via-transparent to-purple-900/25 animate-parallax-fast opacity-35"></div>
-          </div> 
+          </div> */}
 
           {/* Option 10: Aurora Effect */}
-          {/* <div className="absolute inset-0 bg-aurora-effect"></div> */}
+          { <div className="absolute inset-0 bg-aurora-effect"></div> 
 
           {/* Dark Overlay for Better Contrast */}
           <div className="absolute inset-0 bg-black/40"></div>
