@@ -95,7 +95,6 @@ export default function Services({ onNavigate }: ServicesProps) {
     webgl: <WebGLParticles />,
     canvas: <AdvancedCanvas />,
     rive: <RiveAnimation />,
-    gsap: <GSAPAnimation />,
     lottie: <LottieBackground />
   };
 
