@@ -144,9 +144,6 @@ export default function Services({ onNavigate }: ServicesProps) {
                 OUR SERVICES
               </span>
             </h1>
-            {/* Animated underline with enhanced effect */}
-            <div className="w-48 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto rounded-full animate-sweep-glow"></div>
-          </div>
 
           {/* Enhanced Subtitle */}
           <div className="mb-12">
