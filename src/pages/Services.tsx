@@ -158,10 +158,10 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 4: Glassmorphism Light Sweep */}
-           <div className="absolute inset-0 bg-glass-sweep"></div> 
+          {/* <div className="absolute inset-0 bg-glass-sweep"></div> */}
 
           {/* Option 5: Noise Gradient Overlay */}
-          {/* <div className="absolute inset-0 bg-noise-gradient"></div> */}
+           <div className="absolute inset-0 bg-noise-gradient"></div> 
 
           {/* Option 6: Particle Lines / Network Animation */}
           {/* <div className="absolute inset-0">
