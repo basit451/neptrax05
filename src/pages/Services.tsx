@@ -186,10 +186,10 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 8: Moving Stripes / Gradient Sweep */}
-           <div className="absolute inset-0 bg-stripes-animated"></div> */}
+          {/* <div className="absolute inset-0 bg-stripes-animated"></div> */}
 
           {/* Option 9: Parallax Blur Layers */}
-          {/* <div className="absolute inset-0">
+           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-br from-purple-900/30 via-transparent to-blue-900/30 animate-parallax-slow opacity-40"></div>
             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-900/20 via-transparent to-blue-900/20 animate-parallax-medium opacity-30"></div>
             <div className="absolute inset-0 bg-gradient-to-bl from-indigo-900/25 via-transparent to-purple-900/25 animate-parallax-fast opacity-35"></div>
