@@ -186,20 +186,6 @@ export default function Services({ onNavigate }: ServicesProps) {
             <div className="w-64 h-64 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] animate-morphing-blob opacity-20 blur-xl"></div>
           </div>
 
-          {/* Option 3: Sparkle Field */}
-           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-2 h-2 bg-white rounded-full animate-sparkle opacity-60"></div>
-            <div className="w-1 h-1 bg-[#60a5fa] rounded-full animate-sparkle opacity-80 animation-delay-200 absolute top-10 left-20"></div>
-            <div className="w-1 h-1 bg-[#3b82f6] rounded-full animate-sparkle opacity-70 animation-delay-400 absolute bottom-10 right-20"></div>
-            <div className="w-1 h-1 bg-[#93c5fd] rounded-full animate-sparkle opacity-90 animation-delay-600 absolute top-20 right-10"></div>
-          </div>
-
-          {/* Option 4: Floating Orbs Cluster */}
-           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-            <div className="w-12 h-12 bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] rounded-full animate-float-orb opacity-30"></div>
-            <div className="w-8 h-8 bg-gradient-to-r from-[#1e3a8a] to-[#2563eb] rounded-full animate-float-orb opacity-40 animation-delay-300 absolute top-4 left-16"></div>
-            <div className="w-6 h-6 bg-gradient-to-r from-[#60a5fa] to-[#93c5fd] rounded-full animate-float-orb opacity-50 animation-delay-600 absolute bottom-8 right-12"></div>
-          </div>
 
         </div>
 
