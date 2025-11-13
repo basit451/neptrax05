@@ -120,41 +120,6 @@ export default function Services({ onNavigate }: ServicesProps) {
     }
   ];
 
-  // Particle Text Animation Component
-  const ParticleText = ({ text }: { text: string }) => {
-    const [letters, setLetters] = useState<Array<{ char: string; id: number; x: number; y: number; scale: number }>>([]);
-
-    useEffect(() => {
-      const newLetters = text.split('').map((char, index) => ({
-        char,
-        id: index,
-        x: 0,
-        y: 0,
-        scale: 1
-      }));
-      setLetters(newLetters);
-    }, [text]);
-
-    return (
-      <h1 className="text-6xl md:text-8xl font-black mb-4">
-        <span className="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent">
-          {letters.map((letter, index) => (
-            <span
-              key={letter.id}
-              className="inline-block animate-particleFloat"
-              style={{
-                animationDelay: `${index * 0.1}s`,
-                transform: `translate(${letter.x}px, ${letter.y}px) scale(${letter.scale})`
-              }}
-            >
-              {letter.char === ' ' ? '\u00A0' : letter.char}
-            </span>
-          ))}
-        </span>
-      </h1>
-    );
-  };
-
   return (
     <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
       {/* Enhanced Hero Section with Visible Effects */}
@@ -218,13 +183,19 @@ export default function Services({ onNavigate }: ServicesProps) {
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
           
-          {/* Particle Text Animation */}
-          <div className="mb-8 overflow-hidden">
-            <ParticleText text="OUR SERVICES" />
+          {/* Premium Heading with Glow Effect */}
+          <div className="mb-8">
+            <h1 className="text-6xl md:text-8xl font-black mb-6">
+              <span className="bg-gradient-to-r from-[#1e3a8a] via-[#3b82f6] to-[#60a5fa] bg-clip-text text-transparent animate-glowText">
+                OUR SERVICES
+              </span>
+            </h1>
+            {/* Animated underline */}
+            <div className="w-48 h-1 bg-gradient-to-r from-[#1e3a8a] to-[#3b82f6] mx-auto rounded-full animate-pulse"></div>
           </div>
 
           {/* Enhanced Subtitle */}
-          <div className="mb-12 overflow-hidden">
+          <div className="mb-12">
             <p className="text-xl md:text-2xl text-[#94a3b8] font-light max-w-3xl mx-auto leading-relaxed animate-fadeInUp">
               Crafting digital excellence through innovative solutions
             </p>
@@ -383,25 +354,6 @@ export default function Services({ onNavigate }: ServicesProps) {
           }
         }
 
-        @keyframes particleFloat {
-          0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-            opacity: 1;
-          }
-          25% {
-            transform: translate(5px, -8px) scale(1.1) rotate(2deg);
-            opacity: 0.8;
-          }
-          50% {
-            transform: translate(-3px, 6px) scale(0.95) rotate(-1deg);
-            opacity: 0.9;
-          }
-          75% {
-            transform: translate(-5px, -4px) scale(1.05) rotate(1deg);
-            opacity: 0.85;
-          }
-        }
-
         @keyframes orbFloat {
           0%, 100% {
             transform: translate(0, 0) scale(1);
@@ -520,10 +472,6 @@ export default function Services({ onNavigate }: ServicesProps) {
             opacity: 1;
             transform: translateY(0);
           }
-        }
-
-        .animate-particleFloat {
-          animation: particleFloat 3s ease-in-out infinite;
         }
 
         .animate-orbFloat {
