@@ -152,13 +152,13 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 3: Liquid Wave Background */}
-           <div className="absolute inset-0">
+           {/* <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-purple-600 via-blue-600 to-cyan-600 rounded-[40%] animate-liquid-wave opacity-30 blur-xl"></div>
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-blue-500 to-cyan-500 rounded-[30%] animate-liquid-wave-reverse opacity-40 blur-xl animation-delay-2000"></div>
-          </div>
+          </div> */}
 
           {/* Option 4: Glassmorphism Light Sweep */}
-          {/* <div className="absolute inset-0 bg-glass-sweep"></div> */}
+           <div className="absolute inset-0 bg-glass-sweep"></div> 
 
           {/* Option 5: Noise Gradient Overlay */}
           {/* <div className="absolute inset-0 bg-noise-gradient"></div> */}
