@@ -196,7 +196,7 @@ export default function Services({ onNavigate }: ServicesProps) {
           </div> */}
 
           {/* Option 10: Aurora Effect */}
-          { <div className="absolute inset-0 bg-aurora-effect"></div> 
+           <div className="absolute inset-0 bg-aurora-effect"></div> 
 
           {/* Dark Overlay for Better Contrast */}
           <div className="absolute inset-0 bg-black/40"></div>
