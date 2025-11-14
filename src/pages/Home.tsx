@@ -250,7 +250,7 @@ export default function Home({ onNavigate }: HomeProps) {
             {stats.map((stat, index) => (
               <ScrollReveal key={index} direction="up" delay={index * 100} duration={0.6}>
                 <motion.div 
-                  className="text-center p-4 sm:p-6 bg-[#1e293b] rounded-2xl border border-[#334155] hover:border-[#2563eb] transition-all duration-300"
+                  className="text-center p-4 sm:p-6 bg-transparent rounded-2xl border border-[#334155] hover:border-[#2563eb] transition-all duration-300"
                   whileHover={{ scale: 1.05 }}
                 >
                   <div className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-[#2563eb] to-[#3b82f6] bg-clip-text text-transparent mb-2">
