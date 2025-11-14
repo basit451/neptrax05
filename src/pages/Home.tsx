@@ -198,9 +198,9 @@ export default function Home({ onNavigate }: HomeProps) {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 w-full max-w-5xl">
               {clients.slice(0, 3).map((client, index) => (
                 <ScrollReveal key={index} direction="up" delay={index * 100} duration={0.6}>
-                  <motion.div 
-                    className="bg-[#1e293b] rounded-2xl p-4 sm:p-6 hover:bg-[#1e3a8a] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
-                    whileHover={{ 
+                  <motion.div
+                    className="rounded-2xl p-4 sm:p-6 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
+                    whileHover={{
                       scale: 1.03,
                       y: -5
                     }}
@@ -219,9 +219,9 @@ export default function Home({ onNavigate }: HomeProps) {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-3xl">
               {clients.slice(3).map((client, index) => (
                 <ScrollReveal key={index + 3} direction="up" delay={(index + 3) * 100} duration={0.6}>
-                  <motion.div 
-                    className="bg-[#1e293b] rounded-2xl p-4 sm:p-6 hover:bg-[#1e3a8a] transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
-                    whileHover={{ 
+                  <motion.div
+                    className="rounded-2xl p-4 sm:p-6 transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_0_30px_rgba(37,99,235,0.3)] h-full border border-[#334155] hover:border-[#2563eb]"
+                    whileHover={{
                       scale: 1.03,
                       y: -5
                     }}
