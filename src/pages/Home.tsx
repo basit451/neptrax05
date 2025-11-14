@@ -143,7 +143,7 @@ export default function Home({ onNavigate }: HomeProps) {
             </ScrollReveal>
 
             <ScrollReveal direction="fade" delay={400} duration={0.8}>
-              <div className="px-4 sm:px-0">
+              <div className="px-3 sm:px-0">
                 <h3 className="text-xs sm:text-sm text-[#abbcd4] font-bold mb-3 sm:mb-3 text-center lg:text-left">
                   Trusted by Industry Leaders
                 </h3>
