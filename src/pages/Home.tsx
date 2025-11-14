@@ -144,7 +144,7 @@ export default function Home({ onNavigate }: HomeProps) {
 
             <ScrollReveal direction="fade" delay={400} duration={0.8}>
               <div className="px-4 sm:px-0">
-                <h3 className="text-xs sm:text-sm text-[#abbcd4] font-bold mb-2 sm:mb-4 text-center lg:text-left">
+                <h3 className="text-xs sm:text-sm text-[#abbcd4] font-bold mb-3 sm:mb-3 text-center lg:text-left">
                   Trusted by Industry Leaders
                 </h3>
                 <div className="flex items-center justify-center lg:justify-start gap-6 sm:gap-8 md:gap-12 flex-wrap">
