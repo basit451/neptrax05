@@ -2,212 +2,481 @@ import { useState, useEffect, useRef } from 'react';
 import {
   Palette,
   Code,
-  MessageCircle,
-  Users,
-  Brush,
-  Megaphone,
   Search,
-  Bot,
-  Smartphone,
-  BarChart,
-  ShoppingCart,
-  PenTool
+  Target,
+  Layers,
+  Wrench,
+  TrendingUp,
+  Zap,
+  BarChart3,
+  Shield
 } from 'lucide-react';
+import WebGLParticles from './WebGLParticles';
 
 interface ServicesProps {
   onNavigate: (section: string) => void;
 }
 
-export default function Services({ onNavigate }: ServicesProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+interface Particle {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  speedX: number;
+  speedY: number;
+}
 
+export default function Services({ onNavigate }: ServicesProps) {
+  const [particles, setParticles] = useState<Particle[]>([]);
+  const [activeService, setActiveService] = useState(0);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const servicesRef = useRef<HTMLDivElement>(null);
+
+  // Enhanced particle system with mouse interaction
   useEffect(() => {
-    setTimeout(() => setIsLoaded(true), 500);
+    const newParticles = Array.from({ length: 50 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: 0.5 + Math.random() * 2,
+      speedX: (Math.random() - 0.5) * 0.2,
+      speedY: (Math.random() - 0.5) * 0.2,
+    }));
+    setParticles(newParticles);
+    
+    // Loading animation delay
+    setTimeout(() => setIsLoaded(true), 800);
   }, []);
 
-  const services = [
+  // Mouse move effect for particles
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({
+        x: (e.clientX / window.innerWidth) * 100,
+        y: (e.clientY / window.innerHeight) * 100
+      });
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Service scroll animation with Intersection Observer
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = Array.from(servicesRef.current?.children || []).indexOf(entry.target);
+            setActiveService(index);
+          }
+        });
+      },
+      { threshold: 0.6 }
+    );
+
+    const serviceElements = servicesRef.current?.children;
+    if (serviceElements) {
+      Array.from(serviceElements).forEach((el) => observer.observe(el));
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  const servicesList = [
     {
-      title: 'Custom Website Design',
-      description: 'Tailored website designs that capture your brand essence and drive user engagement with modern aesthetics and intuitive interfaces.',
+      title: 'Web Design',
+      description: 'Beautiful, modern interfaces that captivate your audience and drive engagement through thoughtful user experience design.',
       icon: Palette,
-      image: 'demo.png'
+      features: ['Responsive Design', 'User Experience', 'Brand Alignment', 'Modern Aesthetics'],
+      color: 'from-purple-500 to-blue-500'
     },
     {
-      title: 'Full-Stack Web Development',
-      description: 'Robust web applications built with cutting-edge technologies for optimal performance, scalability, and seamless user experiences.',
+      title: 'Web Development',
+      description: 'High-performance websites built with cutting-edge technology stacks for blazing fast load times and seamless interactions.',
       icon: Code,
-      image: 'demo.png'
+      features: ['React/Next.js', 'Performance Optimized', 'Clean Code', 'SEO Ready'],
+      color: 'from-blue-500 to-cyan-500'
     },
     {
-      title: 'AI-Powered Chatbots',
-      description: 'Intelligent chatbot solutions that enhance customer service, automate responses, and provide 24/7 support for your business.',
-      icon: MessageCircle,
-      image: 'demo.png'
-    },
-    {
-      title: 'Social Media Management & Growth',
-      description: 'Comprehensive social media strategies to build your online presence, engage your audience, and drive meaningful growth across platforms.',
-      icon: Users,
-      image: 'demo.png'
-    },
-    {
-      title: 'Brand Identity & Visual Design',
-      description: 'Complete brand development including logos, style guides, and visual assets that communicate your unique value proposition.',
-      icon: Brush,
-      image: 'demo.png'
-    },
-    {
-      title: 'Social Media & Digital Advertising',
-      description: 'Targeted advertising campaigns across social platforms to reach your ideal audience and maximize ROI.',
-      icon: Megaphone,
-      image: 'demo.png'
-    },
-    {
-      title: 'SEO Optimization & Growth Strategy',
-      description: 'Data-driven SEO strategies to improve search rankings, increase organic traffic, and drive sustainable business growth.',
+      title: 'SEO Optimization',
+      description: 'Comprehensive search engine optimization strategies to increase visibility and drive qualified organic traffic to your business.',
       icon: Search,
-      image: 'demo.png'
+      features: ['Keyword Strategy', 'Technical SEO', 'Content Optimization', 'Analytics'],
+      color: 'from-green-500 to-emerald-500'
     },
     {
-      title: 'AI Automation Agents',
-      description: 'Custom AI solutions that automate repetitive tasks, streamline workflows, and enhance operational efficiency.',
-      icon: Bot,
-      image: 'demo.png'
+      title: 'Geo Targeting',
+      description: 'Advanced location-based marketing solutions to reach your target audience in specific geographic regions effectively.',
+      icon: Target,
+      features: ['Local SEO', 'Regional Campaigns', 'Location Analytics', 'Market Research'],
+      color: 'from-red-500 to-orange-500'
     },
     {
-      title: 'Mobile App Design & Development',
-      description: 'Native and cross-platform mobile applications designed for exceptional user experiences and technical excellence.',
-      icon: Smartphone,
-      image: 'demo.png'
-    },
-    {
-      title: 'Marketing Audit & Strategic Planning',
-      description: 'In-depth analysis of your marketing efforts with strategic roadmaps for optimization and accelerated growth.',
-      icon: BarChart,
-      image: 'demo.png'
-    },
-    {
-      title: 'E-Commerce Store Development',
-      description: 'Feature-rich online stores with secure payment systems, inventory management, and optimized shopping experiences.',
-      icon: ShoppingCart,
-      image: 'demo.png'
-    },
-    {
-      title: 'Content Creation & Copywriting',
-      description: 'Compelling content and persuasive copy that resonates with your audience and drives conversion across all channels.',
-      icon: PenTool,
-      image: 'demo.png'
+      title: 'UI/UX Design',
+      description: 'User-centered design approaches that create intuitive, engaging experiences focused on conversion and user satisfaction.',
+      icon: Layers,
+      features: ['User Research', 'Wireframing', 'Prototyping', 'Usability Testing'],
+      color: 'from-indigo-500 to-purple-500'
     }
   ];
 
   return (
     <div className="min-h-screen bg-[#0a0a0a] overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative min-h-[60vh] flex items-center justify-center bg-gradient-to-br from-[#0a0a0a] via-[#0f172a] to-[#1e1b4b]">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-cyan-500/10 via-transparent to-transparent"></div>
-        
+      {/* Enhanced Hero Section with 3D Particle Galaxy */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-[#0a0a0a]">
+        {/* 3D Particle Galaxy Background */}
+        <div className="absolute inset-0">
+          <WebGLParticles />
+          {/* Dark Overlay for Better Contrast */}
+          <div className="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        {/* Main Content with Entrance Animations */}
         <div className={`relative z-10 max-w-6xl mx-auto px-6 text-center transition-all duration-1000 ${
           isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
         }`}>
-          <h1 className="text-5xl md:text-7xl font-black mb-6">
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-              OUR SERVICES
-            </span>
-          </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            Comprehensive digital solutions to elevate your brand and drive measurable results
-          </p>
+          
+          {/* Premium Heading with Enhanced Effects */}
+          <div className="mb-8">
+            <h1 className="text-6xl md:text-8xl font-black mb-6">
+              <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent animate-glow-enhanced">
+                OUR SERVICES
+              </span>
+            </h1>
+            {/* Animated underline with enhanced effect */}
+          </div>
+
+          {/* Enhanced Subtitle */}
+          <div className="mb-12">
+            <p className="text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed animate-fade-in-up-enhanced">
+              Crafting digital excellence through innovative solutions that transform your vision into reality
+            </p>
+          </div>
+
+          {/* Enhanced CTA Buttons */}
+          <div className="flex gap-6 justify-center flex-wrap">
+            <button
+              onClick={() => onNavigate('contact')}
+              className="group relative px-12 py-4 rounded-full bg-transparent border-2 border-cyan-400/50 text-white font-semibold text-lg overflow-hidden transition-all duration-500 hover:scale-105 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/25 backdrop-blur-sm"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                <span>Start Your Project</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+              </span>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
+            </button>
+          </div>
         </div>
       </section>
 
-      {/* Services Grid Section */}
-      <section className="relative py-20 bg-[#0a0a0a]">
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Grid Container */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <div
-                  key={index}
-                  ref={el => cardsRef.current[index] = el}
-                  className="group relative bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-2xl p-6 border border-gray-800 hover:border-cyan-500/30 transition-all duration-500 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/10"
-                >
-                  {/* Number Badge */}
-                  <div className="absolute -top-3 -left-3 w-8 h-8 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-lg">
-                    {(index + 1).toString().padStart(2, '0')}
-                  </div>
-
-                  {/* Content */}
-                  <div className="mb-4">
-                    <Icon className="w-8 h-8 text-cyan-400 mb-3 transition-transform duration-300 group-hover:scale-110" />
-                    <h3 className="text-xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors duration-300">
-                      {service.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                      {service.description}
-                    </p>
-                  </div>
-
-                  {/* Hover Effect Elements */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* Animated Border */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10">
-                    <div className="absolute inset-[1px] rounded-2xl bg-[#0a0a0a]"></div>
-                  </div>
-                </div>
-              );
-            })}
+      {/* Enhanced Services Showcase with Scroll Animations */}
+      <section className="relative py-20 bg-gradient-to-b from-[#0a0a0a] to-[#0f172a]">
+        {/* Sticky Navigation with Enhanced Design */}
+        <div className="sticky top-0 z-50 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-cyan-500/20 py-4">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex overflow-x-auto space-x-4 hide-scrollbar">
+              {servicesList.map((service, index) => {
+                const Icon = service.icon;
+                return (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      const element = document.getElementById(`service-${index}`);
+                      element?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }}
+                    className={`flex items-center space-x-3 px-6 py-3 rounded-full whitespace-nowrap transition-all duration-500 transform backdrop-blur-sm border ${
+                      activeService === index
+                        ? 'bg-gradient-to-r from-cyan-500/20 to-blue-600/20 border-cyan-400/50 text-white shadow-lg scale-105 shadow-cyan-500/25'
+                        : 'text-gray-400 border-gray-600/30 hover:text-white hover:border-cyan-400/30 hover:scale-102 hover:bg-white/5'
+                    }`}
+                  >
+                    <Icon size={20} className={activeService === index ? 'animate-pulse-enhanced' : ''} />
+                    <span className="font-medium">{service.title}</span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Background Effects */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        {/* Services Display with Enhanced Animations */}
+        <div ref={servicesRef} className="max-w-7xl mx-auto px-6">
+          {servicesList.map((service, index) => {
+            const Icon = service.icon;
+            const isEven = index % 2 === 0;
+            
+            return (
+              <div
+                key={index}
+                id={`service-${index}`}
+                className={`min-h-[90vh] flex items-center justify-center py-20 ${
+                  isEven ? 'flex-row' : 'flex-row-reverse'
+                }`}
+              >
+                {/* Content Side with Enhanced Animation */}
+                <div className={`flex-1 ${isEven ? 'pr-12' : 'pl-12'}`}>
+                  <div className={`max-w-2xl transform transition-all duration-1000 ${
+                    isEven ? 'ml-auto translate-x-0' : 'mr-auto translate-x-0'
+                  }`}>
+                    {/* Enhanced Service Title */}
+                    <h2 className={`text-5xl font-black bg-gradient-to-r ${service.color} bg-clip-text text-transparent mb-6 transform transition-all duration-700 hover:scale-105`}>
+                      {service.title}
+                    </h2>
+
+                    {/* Enhanced Service Description */}
+                    <p className="text-xl text-gray-300 mb-8 leading-relaxed animate-text-reveal">
+                      {service.description}
+                    </p>
+
+                    {/* Enhanced Features Grid */}
+                    <div className="grid grid-cols-2 gap-4 mb-8">
+                      {service.features.map((feature, featureIndex) => (
+                        <div
+                          key={featureIndex}
+                          className="flex items-center space-x-3 text-gray-400 transform transition-all duration-500 hover:translate-x-2 hover:text-white group"
+                          style={{ animationDelay: `${featureIndex * 0.1}s` }}
+                        >
+                          <div className={`w-2 h-2 bg-gradient-to-r ${service.color} rounded-full animate-pulse-enhanced group-hover:scale-150 transition-transform duration-300`}></div>
+                          <span className="text-sm font-medium">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Visual Side with Enhanced Effects */}
+                <div className="flex-1 relative">
+                  <div className={`relative transform transition-all duration-500 hover:scale-105 ${
+                    isEven ? 'ml-12' : 'mr-12'
+                  }`}>
+                    {/* Enhanced Visual Container */}
+                    <div className={`relative bg-gradient-to-br ${service.color} rounded-3xl p-1 transform transition-all duration-500 hover:rotate-1 hover:shadow-2xl service-card-enhanced group`}>
+                      <div className="bg-[#0a0a0a] rounded-2xl p-8 h-80 flex items-center justify-center relative overflow-hidden">
+                        {/* Enhanced Background Pattern */}
+                        <div 
+                          className="absolute inset-0 opacity-[0.03]"
+                          style={{
+                            backgroundImage: `
+                              radial-gradient(circle at 25% 25%, #3b82f6 1px, transparent 1px),
+                              radial-gradient(circle at 75% 75%, #60a5fa 1px, transparent 1px)
+                            `,
+                            backgroundSize: '50px 50px',
+                            animation: 'patternMove 15s linear infinite'
+                          }}
+                        />
+                        
+                        <div className="text-center relative z-10">
+                          <Icon className={`text-transparent bg-gradient-to-br ${service.color} bg-clip-text mx-auto mb-4 animate-float-enhanced`} size={48} />
+                          <h3 className="text-2xl font-bold text-white mb-2 animate-pulse-enhanced">{service.title}</h3>
+                          <p className="text-gray-400">Interactive Preview</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Enhanced Floating Elements */}
+                    <div className={`absolute -top-4 -right-4 w-24 h-24 bg-gradient-to-br ${service.color} rounded-2xl blur-xl opacity-30 animate-float-enhanced animation-delay-1000`}></div>
+                    <div className={`absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br ${service.color} rounded-2xl blur-xl opacity-20 animate-float-enhanced-reverse animation-delay-2000`}></div>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </section>
 
       {/* Enhanced Animation Styles */}
       <style jsx>{`
-        @keyframes float {
+        /* Base Animations */
+        @keyframes floatParticle {
           0%, 100% {
-            transform: translateY(0px);
+            transform: translate(0, 0) scale(1);
+            opacity: 0.4;
+          }
+          25% {
+            transform: translate(20px, -20px) scale(1.1);
+            opacity: 0.7;
           }
           50% {
-            transform: translateY(-10px);
+            transform: translate(-15px, 15px) scale(0.9);
+            opacity: 0.5;
+          }
+          75% {
+            transform: translate(-20px, -15px) scale(1.05);
+            opacity: 0.6;
           }
         }
 
-        @keyframes glow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+        @keyframes patternMove {
+          0% {
+            transform: translate(0, 0);
           }
-          50% {
-            box-shadow: 0 0 40px rgba(34, 211, 238, 0.6);
+          100% {
+            transform: translate(50px, 50px);
           }
         }
 
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-glow {
-          animation: glow 2s ease-in-out infinite;
-        }
-
-        /* Staggered animation for cards */
-        .service-card {
-          animation: slideUp 0.6s ease-out forwards;
-          opacity: 0;
-          transform: translateY(30px);
-        }
-
-        @keyframes slideUp {
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
           to {
             opacity: 1;
             transform: translateY(0);
           }
+        }
+
+        /* Enhanced Component Animations */
+        @keyframes glow-enhanced {
+          0%, 100% {
+            text-shadow: 
+              0 0 20px rgba(34, 211, 238, 0.6),
+              0 0 40px rgba(34, 211, 238, 0.4),
+              0 0 60px rgba(34, 211, 238, 0.2);
+          }
+          50% {
+            text-shadow: 
+              0 0 30px rgba(34, 211, 238, 0.8),
+              0 0 60px rgba(34, 211, 238, 0.6),
+              0 0 80px rgba(34, 211, 238, 0.4);
+          }
+        }
+
+        @keyframes sweep-glow {
+          0% {
+            width: 0%;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+          }
+          50% {
+            width: 100%;
+            opacity: 1;
+            box-shadow: 0 0 30px rgba(34, 211, 238, 1);
+          }
+          100% {
+            width: 0%;
+            opacity: 0;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.8);
+            margin-left: 100%;
+          }
+        }
+
+        @keyframes fade-in-up-enhanced {
+          0% {
+            opacity: 0;
+            transform: translateY(40px) scale(0.95);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes text-reveal {
+          0% {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float-enhanced {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          33% {
+            transform: translateY(-10px) rotate(5deg);
+          }
+          66% {
+            transform: translateY(5px) rotate(-3deg);
+          }
+        }
+
+        @keyframes float-enhanced-reverse {
+          0%, 100% {
+            transform: translateY(0px) rotate(0deg);
+          }
+          33% {
+            transform: translateY(10px) rotate(-5deg);
+          }
+          66% {
+            transform: translateY(-5px) rotate(3deg);
+          }
+        }
+
+        @keyframes pulse-enhanced {
+          0%, 100% {
+            opacity: 1;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.7;
+            transform: scale(1.1);
+          }
+        }
+
+        /* Animation Classes */
+        .animate-glow-enhanced {
+          animation: glow-enhanced 3s ease-in-out infinite;
+        }
+
+        .animate-sweep-glow {
+          animation: sweep-glow 4s ease-in-out infinite;
+        }
+
+        .animate-fade-in-up-enhanced {
+          animation: fade-in-up-enhanced 1.2s ease-out forwards;
+        }
+
+        .animate-text-reveal {
+          animation: text-reveal 1s ease-out forwards;
+        }
+
+        .animate-float-enhanced {
+          animation: float-enhanced 4s ease-in-out infinite;
+        }
+
+        .animate-float-enhanced-reverse {
+          animation: float-enhanced-reverse 5s ease-in-out infinite;
+        }
+
+        .animate-pulse-enhanced {
+          animation: pulse-enhanced 2s ease-in-out infinite;
+        }
+
+        .animation-delay-1000 {
+          animation-delay: 1s;
+        }
+
+        .animation-delay-2000 {
+          animation-delay: 2s;
+        }
+
+        .service-card-enhanced {
+          box-shadow: 
+            0 0 0 1px rgba(59, 130, 246, 0.1),
+            0 0 40px rgba(59, 130, 246, 0.1);
+          transition: all 0.5s ease;
+        }
+
+        .service-card-enhanced:hover {
+          box-shadow: 
+            0 0 0 1px rgba(59, 130, 246, 0.3),
+            0 0 60px rgba(59, 130, 246, 0.2),
+            0 0 100px rgba(59, 130, 246, 0.1);
+        }
+
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
         }
       `}</style>
     </div>
